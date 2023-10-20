@@ -1,44 +1,3 @@
-# About
-
-This is a [gomemcache](https://github.com/bradfitz/gomemcache) client mock library.
-
-The implementation is based on the [pgxmock](https://github.com/pashagolub/pgxmock) library, and it has a similar purpose: to simulate a [**gomemcache**](https://github.com/bradfitz/gomemcache) client without an actual memcached server connection.
-
-# Install
-
-```shell
-go get github.com/andreluciani/gomemcachemock/memcachemock
-```
-
-# Usage
-
-The mock API allows little to no change in the code, see the example below:
-
-## Code that uses gomemcache
-
-```go
-package basic
-
-import (
-	"github.com/bradfitz/gomemcache/memcache"
-)
-
-type MemcacheInterface interface {
-	Set(item *memcache.Item) error
-	Get(key string) (item *memcache.Item, err error)
-}
-
-func SetAndGet(mc MemcacheInterface, item *memcache.Item) (*memcache.Item, error) {
-	if err := mc.Set(item); err != nil {
-		return nil, err
-	}
-	return mc.Get(item.Key)
-}
-```
-
-## Testing the code above
-
-```go
 package basic
 
 import (
@@ -106,24 +65,3 @@ func TestGetSet_SetShouldReturnError(t *testing.T) {
 		t.Errorf("there were unfulfilled expectations: %s", err)
 	}
 }
-```
-
-# Tests
-
-```shell
-go test -cover -v ./...
-```
-
-# Docs
-
-See https://pkg.go.dev/github.com/andreluciani/gomemcachemock/memcachemock
-
-Or, with [pkgsite](https://github.com/golang/pkgsite) installed, run:
-
-```shell
-pkgsite
-```
-
-# License
-
-This library is distributed under the [3-Clause BSD License](https://opensource.org/license/bsd-3-clause/)
