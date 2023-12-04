@@ -17,7 +17,7 @@ The mock API allows little to no change in the code, see the example below:
 ## Code that uses gomemcache
 
 ```go
-package basic
+package example
 
 import (
 	"github.com/bradfitz/gomemcache/memcache"
@@ -39,7 +39,7 @@ func SetAndGet(mc MemcacheInterface, item *memcache.Item) (*memcache.Item, error
 ## Testing the code above
 
 ```go
-package basic
+package example
 
 import (
 	"testing"
