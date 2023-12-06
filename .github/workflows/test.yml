@@ -8,10 +8,13 @@ on:
 
 jobs:
   test:
+    environment:
+      name: tests
     if: true # false to skip job during debug
     name: Test on Ubuntu
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         go-version: ["1.18", "1.21"]
     steps:
@@ -34,4 +37,19 @@ jobs:
           version: latest
 
       - name: Test
-        run: go test -v -cover ./...
+        run: go test -v -coverprofile=profile.cov ./...
+
+      - name: Send coverage
+        uses: shogo82148/actions-goveralls@v1
+        with:
+          path-to-profile: profile.cov
+          flag-name: Go-${{ matrix.go }}
+          parallel: true
+
+  finish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: shogo82148/actions-goveralls@v1
+        with:
+          parallel-finished: true
