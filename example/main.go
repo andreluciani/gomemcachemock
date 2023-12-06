@@ -18,7 +18,7 @@ func main() {
 
 	result, err := basic.SetAndGet(mc, item)
 	if err != nil {
-		fmt.Printf("An error occured: %s", err)
+		fmt.Printf("An error occurred: %s", err)
 	}
 	fmt.Printf("Item with key: %s and value: %s retrieved.\n", result.Key, string(result.Value))
 }

@@ -1,3 +1,7 @@
+[![Go Reference](https://pkg.go.dev/badge/github.com/andreluciani/gomemcachemock.svg)](https://pkg.go.dev/github.com/andreluciani/gomemcachemock/memcachemock)
+[![Go Report Card](https://goreportcard.com/badge/github.com/andreluciani/gomemcachemock)](https://goreportcard.com/report/github.com/andreluciani/gomemcachemock)
+[![Coverage Status](https://coveralls.io/repos/github/andreluciani/gomemcachemock/badge.svg?branch=main)](https://coveralls.io/github/andreluciani/gomemcachemock?branch=main)
+
 # About
 
 This is a [gomemcache](https://github.com/bradfitz/gomemcache) client mock library.
