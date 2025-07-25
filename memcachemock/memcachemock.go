@@ -9,12 +9,12 @@ import (
 	"github.com/bradfitz/gomemcache/memcache"
 )
 
-func New(server ...string) *memcachemock {
+func New(server ...string) GomemcacheIface {
 	mock := &memcachemock{}
 	return mock
 }
 
-func NewFromSelector(ss *memcache.ServerSelector) *memcachemock {
+func NewFromSelector(ss *memcache.ServerSelector) GomemcacheIface {
 	mock := &memcachemock{}
 	return mock
 }
@@ -90,7 +90,7 @@ type gomemcacheMockIface interface {
 	ExpectTouch() *ExpectedTouch
 }
 
-type gomemcacheIface interface {
+type GomemcacheIface interface {
 	gomemcacheMockIface
 	Add(item *memcache.Item) error
 	Append(item *memcache.Item) error
@@ -110,7 +110,7 @@ type gomemcacheIface interface {
 	Touch(key string, seconds int32) (err error)
 }
 
-var _ gomemcacheIface
+var _ GomemcacheIface = (*memcachemock)(nil)
 
 type memcachemock struct {
 	expectations []Expectation

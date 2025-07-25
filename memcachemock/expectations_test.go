@@ -279,7 +279,7 @@ func TestSecondsMatches_Error(t *testing.T) {
 }
 
 func TestExpectationStrings(t *testing.T) {
-	mock := New("localhost:11211")
+	mock := New("localhost:11211").(*memcachemock)
 	a := assert.New(t)
 	mock.ExpectPing().Maybe().
 		WillReturnError(memcache.ErrServerError)
