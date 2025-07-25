@@ -8,8 +8,7 @@ on:
 
 jobs:
   test:
-    environment:
-      name: tests
+    environment: ${{ github.ref == 'refs/heads/main' && 'tests' || '' }}
     if: true # false to skip job during debug
     name: Test on Ubuntu
     runs-on: ubuntu-latest
@@ -41,6 +40,7 @@ jobs:
 
       - name: Send coverage
         uses: shogo82148/actions-goveralls@v1
+        if: ${{ github.ref == 'refs/heads/main' }}
         with:
           path-to-profile: profile.cov
           flag-name: Go-${{ matrix.go }}
@@ -49,6 +49,7 @@ jobs:
   finish:
     needs: test
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
     steps:
       - uses: shogo82148/actions-goveralls@v1
         with:

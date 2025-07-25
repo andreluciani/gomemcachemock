@@ -461,7 +461,7 @@ func findExpectationFunc[ET ExpectationType[t], t any](c *memcachemock, method s
 		if fulfilled == len(c.expectations) {
 			msg = "all expectations were already fulfilled, " + msg
 		}
-		return nil, fmt.Errorf(msg)
+		return nil, fmt.Errorf("%s", msg)
 	}
 	defer expected.Unlock()
 
